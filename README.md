@@ -40,24 +40,34 @@ The basic implementation for paypal api v4 only require to call two api `payment
 
 # API
 
+### **new**_(config)_
+  Config is a table with *client_id*, *secret* and *env* key
+  - client\_id from paypal developer setting
+  - secret from paypal developer setting
+  - env is `live` or `sandbox`
+
 ### **post**_(api\_path, params)_
-  Call POST api
+  Call paypal POST api
   - api_path api path eg _payments/payment_ excluding version `/v1`
   - params table of params as required in doc 
 
-  Call GET api
+### **get**_(api\_path, params)_
+  Call paypal GET api
   - api_path api path eg _payments/payment_
   - params table of params as required in doc 
 
-  Call PUT api
+### **put**_(api\_path, params)_
+  Call paypal PUT api
   - api_path api path eg _payments/payment_
   - params table of params as required in doc 
 
-  Call PATCH api
+### **patch**_(api\_path, params)_
+  Call paypal PATCH api
   - api_path api path eg _payments/payment_
   - params table of params as required in doc 
 
-  Call DELETE api
+### **delete**_(api\_path, params)_
+  Call paypal DELETE api
   - api_path api path eg _payments/payment_
   - params table of params as required in doc 
 
