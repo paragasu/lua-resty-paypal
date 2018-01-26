@@ -83,8 +83,8 @@ $resty test/test.lua
   - api_path api path eg _payments/payment_
   - params table of params as required in doc 
 
-Some api\_path is not so straight forward and need to be constructed before passing as api path.
-For example, payments sale api is `/v1/payments/sale/{sale_id}` 
+Some paypal api is not so straight forward and need to be constructed before passed as api path.
+For example, payments sale api is `/v1/payments/sale/{sale_id}` .
 
 
 # Reference
