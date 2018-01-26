@@ -66,6 +66,6 @@ For example, payments sale api is `/v1/payments/sale/{sale_id}`
 
 
 # Reference
-[Paypal REST documentation](https://developer.paypal.com/docs/api/overview)
-[Paypal Express Checkout v4 REST API](https://developer.paypal.com/docs/integration/direct/express-checkout/integration-jsv4)
-[Paypal REST server side integration](https://developer.paypal.com/docs/integration/direct/express-checkout/integration-jsv4/server-side-REST-integration)
+[Paypal REST documentation](https://developer.paypal.com/docs/api/overview) 
+[Paypal Express Checkout v4 REST API](https://developer.paypal.com/docs/integration/direct/express-checkout/integration-jsv4) 
+[Paypal REST server side integration](https://developer.paypal.com/docs/integration/direct/express-checkout/integration-jsv4/server-side-REST-integration) 
