@@ -1,8 +1,5 @@
 # lua-resty-paypal
-Lua backend [Paypal Express Checkout v4 REST API](https://developer.paypal.com/docs/integration/direct/express-checkout/integration-jsv4)
-
-The basic implementation for paypal api v4 only require to call two api `payments/payment` and `payments/execute`.
-
+Simple lua wrapper for Paypal REST API.
 
 # Usage
 ```lua
