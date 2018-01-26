@@ -7,13 +7,6 @@ local mt = { __index = _M }
 local sandbox_url = 'https://api.sandbox.paypal.com/v1/'
 local api_url = 'https://api.paypal.com/v1/'
 
-function create_url(path, params)
-  local api = _M.env == 'sandbox' and sandbox_url or api_url
-  local url = api .. path
-  if params then url = url .. '?' .. ngx.encode_args(params or {}) end
-  return url
-end
-
 function request(method, path, params)
   local httpc = http.new()
   local args  = {
@@ -25,7 +18,7 @@ function request(method, path, params)
       ['Authorization'] =  'Bearer ' .. _M.get_access_token()
     } 
   }
-  local url = create_url(path)
+  local url = _M.create_url(path)
   local res, err = httpc:request_uri(url, args)
   if res.status == 201 then
     return json.decode(res.body) 
@@ -33,7 +26,6 @@ function request(method, path, params)
     return nil, json.decode(res.body)
   end
 end
-
 
 function _M.new(config)
   if not config then error("Missing paypal config params") end
@@ -44,6 +36,13 @@ function _M.new(config)
   _M.client_id = config.client_id
   _M.secret = config.secret
   return setmetatable(_M, mt)
+end
+
+function _M.create_url(path, params)
+  local api = _M.env == 'sandbox' and sandbox_url or api_url
+  local url = api .. path
+  if params then url = url .. '?' .. ngx.encode_args(params or {}) end
+  return url
 end
 
 function _M.get_access_token()
@@ -57,7 +56,7 @@ function _M.get_access_token()
       ['Authorization'] = 'Basic ' .. ngx.encode_base64(_M.client_id .. ':' .. _M.secret)
     }
   } 
-  local url = create_url('oauth2/token')
+  local url = _M.create_url('oauth2/token')
   local res, err = httpc:request_uri(url, args) 
   if not res then return nil, err end
   if res.status == 200 then

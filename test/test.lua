@@ -14,6 +14,16 @@ local paypal = Paypal.new({
 local payer_id
 
 describe('Paypal account', function()
+
+  it('Test create url', function()
+    local url = paypal.create_url('payments/payment')    
+    assert.are.equal(url, 'https://api.sandbox.paypal.com/v1/payments/payment')
+  end)
+
+  it('Test create url with params', function()
+    local url = paypal.create_url('payments/payment', { hello = 'world' })    
+    assert.are.equal(url, 'https://api.sandbox.paypal.com/v1/payments/payment?hello=world')
+  end)
   
   it('Test get_access_token', function()
     local access_token = paypal:get_access_token() 
@@ -37,7 +47,6 @@ describe('Paypal account', function()
         cancel_url = "https://www.example.com/cancel"
       } 
     }) 
-    ngx.log(ngx.ERR, inspect(res))
     payer_id = res.id
     assert.are.equal(err, nil)
   end)
