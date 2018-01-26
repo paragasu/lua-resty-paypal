@@ -20,7 +20,7 @@ function request(method, path, params)
   }
   local url = _M.create_url(path)
   local res, err = httpc:request_uri(url, args)
-  if res.status == 201 then
+  if res.status == 201 or res.status == 200 then
     return json.decode(res.body) 
   else
     return nil, json.decode(res.body)
