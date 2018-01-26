@@ -1,5 +1,5 @@
 # lua-resty-paypal
-Lua rest backend [paypal express checkout v4 API](https://developer.paypal.com/docs/integration/direct/express-checkout/integration-jsv4)
+Lua backend [Paypal Express Checkout v4 REST API](https://developer.paypal.com/docs/integration/direct/express-checkout/integration-jsv4)
 
 
 # Usage
@@ -24,7 +24,7 @@ Lua rest backend [paypal express checkout v4 API](https://developer.paypal.com/d
   })
 
   -- https://developer.paypal.com/docs/api/payments/#payment_execute
-  local res, err = paypal:execute('v1/payments/execute', {
+  local res, err = paypal:api('v1/payments/execute', {
     payer_id: "xxx"
   })
 ```
