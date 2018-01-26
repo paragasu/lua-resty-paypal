@@ -31,6 +31,7 @@ Lua backend [Paypal Express Checkout v4 REST API](https://developer.paypal.com/d
 
   -- https://developer.paypal.com/docs/api/payments/#payment_execute
   local res, err = paypal:post('payments/execute', {
+    payment_id: "xxx",
     payer_id: "xxx"
   })
 ```
