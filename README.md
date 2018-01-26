@@ -11,9 +11,20 @@ Lua rest backend [paypal express checkout v4 API](https://developer.paypal.com/d
     env: 'live'
   })
 
-  local res, err = paypal:create({
+  -- https://developer.paypal.com/docs/api/payments/#payment_create
+  local res, err = paypal:api('v1/payments/payment', {
+    intent = "sale",
+    payer = {
+      payment_method = "paypal",
+      transactions = {
+        description = "something to pay",
+        amount: { total = "30.10", currency = "USD" }  
+      }
+    }
   })
 
-  local res, err = paypal:execute({
+  -- https://developer.paypal.com/docs/api/payments/#payment_execute
+  local res, err = paypal:execute('v1/payments/execute', {
+    payer_id: "xxx"
   })
 ```
