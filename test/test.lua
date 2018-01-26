@@ -11,6 +11,8 @@ local paypal = Paypal.new({
   env = 'sandbox' 
 })
 
+local payer_id
+
 describe('Paypal account', function()
   
   it('Test get_access_token', function()
@@ -35,8 +37,9 @@ describe('Paypal account', function()
         cancel_url = "https://www.example.com/cancel"
       } 
     }) 
-    ngx.log(ngx.ERR, inspect(err))
-    assert.are.equal(res.status, 200)
+    ngx.log(ngx.ERR, inspect(res))
+    payer_id = res.id
+    assert.are.equal(err, nil)
   end)
 
 end)
