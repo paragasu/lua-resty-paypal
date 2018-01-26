@@ -10,7 +10,7 @@ local api_url = 'https://api.paypal.com/v1/'
 function create_url(path, params)
   local api = _M.env == 'sandbox' and sandbox_url or api_url
   local url = api .. path
-  if params then url = url .. '?' .. ngx.encode_args(params) end
+  if params then url = url .. '?' .. ngx.encode_args(params or {}) end
   return url
 end
 
@@ -25,8 +25,13 @@ function request(method, path, params)
       ['Authorization'] =  'Bearer ' .. _M.get_access_token()
     } 
   }
-  local url = create_url(path, params)
-  return httpc:request(url, args)
+  local url = create_url(path)
+  local res, err = httpc:request_uri(url, args)
+  if res.status == 200 then
+    return json.decode(res.body) 
+  else
+    return nil, json.decode(res.body)
+  end
 end
 
 
@@ -65,7 +70,7 @@ function _M.get(self, api, args)
   return request('GET', api, args) 
 end
 
-function _M.post(self, args)
+function _M.post(self, api, args)
   return request('POST', api, args) 
 end
 

@@ -18,4 +18,25 @@ describe('Paypal account', function()
     assert.are.equal(type(access_token), "string")
   end)
 
+  it('Test create payment', function()
+    local res, err = paypal:post('payments/payment', {
+      intent = "sale",
+      payer = {
+        payment_method = "paypal",
+      },
+      transactions = {
+        {
+          description = "something to pay",
+          amount = { total = "30.10", currency = "USD" }  
+        }
+      },
+      redirect_urls = {
+        return_url = "https://www.example.com/return",
+        cancel_url = "https://www.example.com/cancel"
+      } 
+    }) 
+    ngx.log(ngx.ERR, inspect(err))
+    assert.are.equal(res.status, 200)
+  end)
+
 end)
