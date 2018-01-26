@@ -1,16 +1,16 @@
 local http = require 'resty.http'
-local json = json or require 'json'
+local json = json or require 'cjson'
+local i  = require 'inspect'
 local _M = { __VERSION = '0.1-0' }
 local mt = { __index = _M }
 
 local sandbox_url = 'https://api.sandbox.paypal.com/v1/'
-local api_url = 'https://api.paypal.com/v1/';
+local api_url = 'https://api.paypal.com/v1/'
 
 function create_url(path, params)
-  local url = api_url .. path
-  if params not nil then
-    url = url .. '?' .. ngx.encode_args(params)
-  end 
+  local api = _M.env == 'sandbox' and sandbox_url or api_url
+  local url = api .. path
+  if params then url = url .. '?' .. ngx.encode_args(params) end
   return url
 end
 
@@ -19,6 +19,7 @@ function request(method, path, params)
   local args  = {
     method = method,
     body = json.encode(params),
+    ssl_verify = false,
     headers = {
       ['Content-Type']  = 'application/json',
       ['Authorization'] =  'Bearer ' .. _M.get_access_token()
@@ -45,12 +46,19 @@ function _M.get_access_token()
   local args = {
     method = 'POST',
     body = "grant_type=client_credentials",
+    ssl_verify = false,
     headers = { 
-      ['Accept'] = 'application/json' 
-      ['Authorization'] = 'Basic ' .. ngx.base64(_M.client_id .. ':' .. _M.secret)
+      ['Accept'] = 'application/json',
+      ['Authorization'] = 'Basic ' .. ngx.encode_base64(_M.client_id .. ':' .. _M.secret)
     }
   } 
-  local res = httpc:request(url, args) 
+  local url = create_url('oauth2/token')
+  local res, err = httpc:request_uri(url, args) 
+  if not res then return nil, err end
+  if res.status == 200 then
+    local body = json.decode(res.body)
+    return body.access_token
+  end 
 end
 
 function _M.get(self, api, args)
