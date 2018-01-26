@@ -74,4 +74,16 @@ function _M.post(self, api, args)
   return request('POST', api, args) 
 end
 
+function _M.put(self, api, args)
+  return request('PUT', api, args) 
+end
+
+function _M.patch(self, api, args)
+  return request('PATCH', api, args) 
+end
+
+function _M.delete(self, api, args)
+  return request('DELETE', api, args) 
+end
+
 return _M

@@ -1,6 +1,8 @@
 # lua-resty-paypal
 Lua backend [Paypal Express Checkout v4 REST API](https://developer.paypal.com/docs/integration/direct/express-checkout/integration-jsv4)
 
+The basic implementation for paypal api v4 only require to call two api `payments/payment` and `payments/execute`.
+
 
 # Usage
 ```lua
@@ -35,3 +37,35 @@ Lua backend [Paypal Express Checkout v4 REST API](https://developer.paypal.com/d
     payer_id: "xxx"
   })
 ```
+
+# API
+
+### **post**_(api\_path, params)_
+  Call POST api
+  - api_path api path eg _payments/payment_ excluding version `/v1`
+  - params table of params as required in doc 
+
+  Call GET api
+  - api_path api path eg _payments/payment_
+  - params table of params as required in doc 
+
+  Call PUT api
+  - api_path api path eg _payments/payment_
+  - params table of params as required in doc 
+
+  Call PATCH api
+  - api_path api path eg _payments/payment_
+  - params table of params as required in doc 
+
+  Call DELETE api
+  - api_path api path eg _payments/payment_
+  - params table of params as required in doc 
+
+Some api\_path is not so straight forward and need to be constructed before passing as api path.
+For example, payments sale api is `/v1/payments/sale/{sale_id}` 
+
+
+# Reference
+[Paypal REST documentation](https://developer.paypal.com/docs/api/overview)
+[Paypal Express Checkout v4 REST API](https://developer.paypal.com/docs/integration/direct/express-checkout/integration-jsv4)
+[Paypal REST server side integration](https://developer.paypal.com/docs/integration/direct/express-checkout/integration-jsv4/server-side-REST-integration)
