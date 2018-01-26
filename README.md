@@ -1,6 +1,21 @@
 # lua-resty-paypal
 Simple lua wrapper for Paypal REST API.
 
+# Installation
+
+### Luarocks
+
+```bash
+#luarocks install lua-resty-paypal
+```
+
+### Github
+```bash
+$git clone https://github.com/paragasu/lua-resty-paypal
+$cd lua-resty-paypal
+$resty test/test.lua
+```
+
 # Usage
 ```lua
   local Paypal = require 'resty.paypal'
