@@ -1,8 +1,8 @@
 package = "lua-resty-paypal"
-version = "0.1-0"
+version = "0.1-1"
 source = {
    url = "git://github.com/paragasu/lua-resty-paypal",
-   tag = "v0.1-0"
+   tag = "v0.1-1"
 }
 description = {
    summary  = "Simple lua wrapper for paypal REST api",
